@@ -12,6 +12,23 @@ header{
     align-items: center;
     justify-content:left;
     box-shadow: 2px 40px 100px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.logout{
+    position: absolute;
+    right: 1vw;
+}
+
+.logoutbtn{
+    border: none;
+    background-color: red;
+    color: white;
+    padding: 2px;
+    border-radius: 4px;
+}
+.logoutbtn:hover{
+    background-color: darkred;
 }
 
 header a{
