@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link rel="stylesheet" href="./vocabulary.css">
+</head>
+
+<body>
+    <header>
+        <div class="headbox">
+            <h3>VocabApp</h3>
+        </div>
+        <div class="linkbox">
+            <a href="">Dashboard</a>
+            <a href="./categories/category.html">Categories</a>
+            <a href="/">Vocabulary</a>
+            <a href="/">Flashcards</a>
+            <a href="/">Quizz</a>
+        </div>
+    </header>
+
+    <div id="Words_container">
+        <div class="addBox">
+            <h2>Vocabulary Words</h2>
+            <button type="button" class="btn btn-success" onclick="showAddModal()">Add New Category</button>
+        </div>
+        <div class="searchBox">
+            <select name="" id=""></select>
+            <input type="text" id="" placeholder="Search categories...">
+        </div>
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">WORD</th>
+                    <th scope="col">MEANING</th>
+                    <th scope="col">CATEGORY</th>
+                    <th scope="col">ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- nội dung -->
+            </tbody>
+        </table>
+        <div id="overlay" class="overlay"></div>
+        <div class="addForm_Container">
+            <div class="formNav">
+                <p>Add New Word</p>
+                <i class="fa-solid fa-xmark" onclick="closeModal()"></i>
+            </div>
+            <div class="formBD">
+                <label for="">Word</label>
+                <input type="text">
+                <label for="">Meaning</label>
+                <textarea name="" id=""></textarea>
+                <label for="">Category</label>
+                <select name="" id="">
+                    <option value="">Select categories</option>
+                    <option value="Cây cối">Cây cối</option>
+                </select>
+            </div>
+            <div class="formFooter">
+                <button type="button" class="btn btn-secondary">Cancel</button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p id="cre">&copy 2024 VocabApp. All right reserved.</p>
+    </footer>
+    <script src="https://kit.fontawesome.com/7b988689d5.js" crossorigin="anonymous"></script>
+    <script src="./vocabulary.js"></script>
+</body>
+</html>

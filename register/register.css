@@ -39,6 +39,14 @@ body {
     box-sizing: border-box;
   }
 
+  a{
+    text-decoration: none;
+  }
+
+  p{
+    text-align: center;
+  }
+
   button {
     width: 100%;
     padding: 10px;
