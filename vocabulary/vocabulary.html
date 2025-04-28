@@ -18,7 +18,7 @@
         <div class="linkbox">
             <a href="">Dashboard</a>
             <a href="./categories/category.html">Categories</a>
-            <a href="/">Vocabulary</a>
+            <a href="#">Vocabulary</a>
             <a href="/">Flashcards</a>
             <a href="/">Quizz</a>
         </div>
@@ -27,11 +27,13 @@
     <div id="Words_container">
         <div class="addBox">
             <h2>Vocabulary Words</h2>
-            <button type="button" class="btn btn-success" onclick="showAddModal()">Add New Category</button>
+            <button type="button" class="btn btn-success" onclick="showAddModal()">Add New Word</button>
         </div>
         <div class="searchBox">
-            <select name="" id=""></select>
-            <input type="text" id="" placeholder="Search categories...">
+            <select name="" id="selectCategory" onchange="searchVocab()">
+                <option value="">All category</option>
+            </select>
+            <input type="text" id="searchWord" placeholder="Search Word..." onkeyup="searchVocab()">
         </div>
         <table class="table">
             <thead class="thead-light">
@@ -48,25 +50,7 @@
         </table>
         <div id="overlay" class="overlay"></div>
         <div class="addForm_Container">
-            <div class="formNav">
-                <p>Add New Word</p>
-                <i class="fa-solid fa-xmark" onclick="closeModal()"></i>
-            </div>
-            <div class="formBD">
-                <label for="">Word</label>
-                <input type="text">
-                <label for="">Meaning</label>
-                <textarea name="" id=""></textarea>
-                <label for="">Category</label>
-                <select name="" id="">
-                    <option value="">Select categories</option>
-                    <option value="Cây cối">Cây cối</option>
-                </select>
-            </div>
-            <div class="formFooter">
-                <button type="button" class="btn btn-secondary">Cancel</button>
-                <button type="button" class="btn btn-primary">Save</button>
-            </div>
+            <!-- popupForm -->
         </div>
     </div>
 

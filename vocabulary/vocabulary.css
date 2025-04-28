@@ -113,6 +113,13 @@ footer {
     justify-content: space-between;
     text-align: center;
 }
+.formFooter{
+    display: flex;
+    gap: 1vw;
+    border-top: 1px solid gray;
+    padding: 10px 0px;
+    justify-content: end;
+}
 
 #editbtn{
     border: none;

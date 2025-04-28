@@ -26,3 +26,4 @@ function goToLogin() {
 function goToRegister() {
   window.location.href = "./register/register.html";
 }
+
