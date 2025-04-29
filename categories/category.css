@@ -1,4 +1,4 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -21,42 +21,42 @@ body {
     gap: 2vh;
 }
 
-.addBox{
+.addBox {
     display: flex;
     justify-content: space-between;
 }
 
-.searchBox input{
+.searchBox input {
     width: 80vw;
     height: 6vh;
 }
 
-header{
+header {
     display: flex;
     height: 5vh;
     gap: 1vw;
     text-align: center;
     align-items: center;
-    justify-content:left;
+    justify-content: left;
     box-shadow: 2px 40px 100px rgba(0, 0, 0, 0.3);
     position: relative;
 }
 
-.linkbox{
+.linkbox {
     display: flex;
     gap: 1vw;
 }
 
-header a{
+header a {
     text-decoration: none;
     color: grey;
 }
 
-header a:hover{
+header a:hover {
     color: #007bff;
 }
 
-.headbox{
+.headbox {
     margin-left: 5vw;
 }
 
@@ -69,14 +69,14 @@ footer {
     box-shadow: 2px 40px 100px rgba(0, 0, 0, 0.3);
 }
 
-#cre{
+#cre {
     width: 100%;
     text-align: center;
     margin-bottom: 0px;
 }
 
 /* popup Form */
-.addForm_Container{
+.addForm_Container {
     position: absolute;
     top: 0px;
     left: 33%;
@@ -84,24 +84,27 @@ footer {
     flex-direction: column;
     border: 1px solid black;
     background: white;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     padding: 10px;
     gap: 10px;
     width: 33%;
     z-index: 101;
 }
-.formBD{
+
+.formBD {
     display: flex;
     flex-direction: column;
 }
-.formNav{
+
+.formNav {
     border-bottom: 1px solid gray;
     display: flex;
     justify-content: space-between;
     text-align: center;
 }
-.formFooter{
+
+.formFooter {
     display: flex;
     gap: 1vw;
     border-top: 1px solid gray;
@@ -109,16 +112,18 @@ footer {
     justify-content: end;
 }
 
-#editbtn{
+#editbtn {
     border: none;
     color: #007bff;
     background-color: white;
 }
-#deletebtn{
+
+#deletebtn {
     border: none;
     color: red;
     background-color: white;
 }
+
 .overlay {
     display: none;
     position: fixed;
@@ -131,3 +136,39 @@ footer {
 }
 
 /* phân trang */
+.pagination {
+    position: relative;
+    background: #fff;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 20px;
+    border-radius: 50px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.pagination li {
+    list-style: none;
+    line-height: 30px;
+    margin: 0 5px;
+}
+
+.pagination li.pageNumber {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.pagination li a {
+    display: block;
+    text-decoration: none;
+    color: #777;
+    font-weight: 600;
+    border-radius: 50%;
+}
+
+.pagination li.pageNumber:hover a,
+.pagination li.pageNumber.active a {
+    background-color: #198754;
+    color: white;
+}
