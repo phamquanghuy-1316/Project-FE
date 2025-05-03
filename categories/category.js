@@ -11,11 +11,12 @@ let categoryList = [
   },
 ];
 
-let currentPage = 1;
+// Load current page từ sessionStorage nếu có
+let currentPage = parseInt(sessionStorage.getItem("currentPage")) || 1;
 let dataPerPage = 2;
-let numberOfPage = Math.ceil(categoryList.length / 2);
+let numberOfPage;
 
-//lấy dữ liệu từ localstorage
+// Load từ localStorage nếu có
 if (localStorage.getItem("categoryList")) {
   categoryList = JSON.parse(localStorage.getItem("categoryList"));
 }
@@ -25,43 +26,34 @@ function saveToLocalStorage() {
 }
 
 const categoryListEl = document.querySelector("tbody");
-function renderCategory(List = categoryList) {
-  let dataHTML = ``;
-  for (let i = 0; i < List.length; i++) {
-    dataHTML += `
-            <tr>
-                <td>${List[i].name}</td>
-                <td>${List[i].description}</td>
-                <td>
-                    <button id="editbtn" onclick="LoadCategory(${i})"">Sửa</button>
-                    <button id="deletebtn" onclick="showDeleteModal(${List[i].id})">Xóa</button>
-                </td>
-            </tr>
-        `;
-  }
-  categoryListEl.innerHTML = dataHTML;
-}
 
-// function renderCategory(List = categoryList) {
-//     const start = (currentPage - 1) * dataPerPage;
-//     const end = start + dataPerPage;
-//     const pageData = List.slice(start, end);
-  
-//     let dataHTML = ``;
-//     for (let i = 0; i < pageData.length; i++) {
-//       dataHTML += `
-//               <tr>
-//                   <td>${pageData[i].name}</td>
-//                   <td>${pageData[i].description}</td>
-//                   <td>
-//                       <button id="editbtn" onclick="LoadCategory(${i})"">Sửa</button>
-//                       <button id="deletebtn" onclick="showDeleteModal(${pageData[i].id})">Xóa</button>
-//                   </td>
-//               </tr>
-//           `;
-//     }
-//     categoryListEl.innerHTML = dataHTML;
-//   }
+function renderCategory(List = categoryList) {
+  const totalPage = Math.ceil(List.length / dataPerPage);
+  if (currentPage > totalPage && totalPage > 0) {
+    currentPage = totalPage;
+  }
+
+  const start = (currentPage - 1) * dataPerPage;
+  const end = start + dataPerPage;
+  const pageData = List.slice(start, end);
+
+  let dataHTML = ``;
+  for (let i = 0; i < pageData.length; i++) {
+    dataHTML += `
+      <tr>
+        <td>${pageData[i].name}</td>
+        <td>${pageData[i].description}</td>
+        <td>
+          <button id="editbtn"  onclick="LoadCategory(${categoryList.indexOf(pageData[i])})">Sửa</button>
+          <button id="deletebtn"  onclick="showDeleteModal(${pageData[i].id})">Xóa</button>
+        </td>
+      </tr>
+    `;
+  }
+
+  categoryListEl.innerHTML = dataHTML;
+  renderPagination();
+}
 
 // Hàm thêm Category
 function addCategory(event) {
@@ -86,17 +78,15 @@ function addCategory(event) {
   renderCategory();
 }
 
-//hàm load Category
 let currentEditIndex = null;
 function LoadCategory(index) {
   showEditModal();
   currentEditIndex = index;
   document.getElementById("inputName").value = categoryList[index].name;
-  document.getElementById("inputDescription").value =
-    categoryList[index].description;
+  document.getElementById("inputDescription").value = categoryList[index].description;
 }
 
-//Hàm chỉnh Category
+// Sửa category
 function EditCategory(event) {
   event.preventDefault();
 
@@ -116,42 +106,41 @@ function EditCategory(event) {
 
   alert("Sửa thành công!");
   saveToLocalStorage();
-  renderCategory();
   closeModal();
+  renderCategory();
 }
 
-// Hàm xóa category
+// Xoá category
 function deleteCategory(event, id) {
   event.preventDefault();
   categoryList = categoryList.filter((category) => category.id !== id);
   saveToLocalStorage();
+  closeModal();
   renderCategory();
 }
 
-//hàm tìm kiếm category
+// Tìm kiếm
 function searchCategory() {
-  let categorySearch = document
-    .querySelector("#searchCategory")
-    .value.trim()
-    .toLowerCase();
+  let categorySearch = document.querySelector("#searchCategory").value.trim().toLowerCase();
 
   let arrayResult = categoryList.filter((category) => {
     return category.name.toLowerCase().includes(categorySearch);
   });
 
+  currentPage = 1;
   renderCategory(arrayResult);
 }
 
+// MODAL
 const form = document.querySelector(".addForm_Container");
 const overlay = document.getElementById("overlay");
 const editForm = document.querySelector(".addForm_Container");
-// Mở modal thêm từ vựng
+
 function openModal() {
   form.style.display = "block";
   overlay.style.display = "block";
 }
 
-// Đóng modal
 function closeModal() {
   form.style.display = "none";
   overlay.style.display = "none";
@@ -159,108 +148,121 @@ function closeModal() {
 
 function showEditModal() {
   editForm.innerHTML = `
-        <form onsubmit="EditCategory(event)">
-            <div class="formNav">
-                <p>Edit Category</p>
-                <i class="fa-solid fa-xmark" onclick="closeModal()"></i>
-            </div>
-            <div class="formBD">
-                <label for="inputName">Name</label>
-                <input type="text" id="inputName" name="inputName">
-                <label for="inputDescription">Description</label>
-                <textarea name="" id="inputDescription" name="inputDescription"></textarea>
-            </div>
-            <div class="formFooter">
-                <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-                <button type="submit" class="btn btn-primary">Save</button>
-            </div>
-        </form>
-        `;
+    <form onsubmit="EditCategory(event)">
+      <div class="formNav">
+        <p>Edit Category</p>
+        <i class="fa-solid fa-xmark" onclick="closeModal()"></i>
+      </div>
+      <div class="formBD">
+        <label for="inputName">Name</label>
+        <input type="text" id="inputName" name="inputName">
+        <label for="inputDescription">Description</label>
+        <textarea id="inputDescription" name="inputDescription"></textarea>
+      </div>
+      <div class="formFooter">
+        <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+  `;
   openModal();
 }
 
 function showAddModal() {
   editForm.innerHTML = `
-        <form onsubmit="addCategory(event)">
-            <div class="formNav">
-                <p>Add Category</p>
-                <i class="fa-solid fa-xmark" onclick="closeModal()"></i>
-            </div>
-            <div class="formBD">
-                <label for="inputName">Name</label>
-                <input type="text" id="inputName" name="inputName">
-                <label for="inputDescription">Description</label>
-                <textarea name="" id="inputDescription" name="inputDescription"></textarea>
-            </div>
-            <div class="formFooter">
-                <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-                <button type="submit" class="btn btn-primary">Save</button>
-            </div>
-        </form>
-    `;
+    <form onsubmit="addCategory(event)">
+      <div class="formNav">
+        <p>Add Category</p>
+        <i class="fa-solid fa-xmark" onclick="closeModal()"></i>
+      </div>
+      <div class="formBD">
+        <label for="inputName">Name</label>
+        <input type="text" id="inputName" name="inputName">
+        <label for="inputDescription">Description</label>
+        <textarea id="inputDescription" name="inputDescription"></textarea>
+      </div>
+      <div class="formFooter">
+        <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+  `;
   openModal();
 }
 
 function showDeleteModal(id) {
   editForm.innerHTML = `
     <form onsubmit="deleteCategory(event, ${id})">
-        <div class="formNav">
-            <p>Delete Category</p>
-            <i class="fa-solid fa-xmark" onclick="closeModal()"></i>
-        </div>
-        <div class="formBD">
-            <p>are you sure you want to delete this category?</p>
-        </div>
-        <div class="formFooter">
-            <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-            <button type="submit" class="btn btn-danger" onclick="closeModal()">Delete</button>
-        </div>
+      <div class="formNav">
+        <p>Delete Category</p>
+        <i class="fa-solid fa-xmark" onclick="closeModal()"></i>
+      </div>
+      <div class="formBD">
+        <p>Are you sure you want to delete this category?</p>
+      </div>
+      <div class="formFooter">
+        <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </div>
     </form>
-    `;
+  `;
   openModal();
 }
-renderCategory();
 
-//phân trang hiệu ứng
-document.addEventListener("DOMContentLoaded", function () {
+// PHÂN TRANG
+function renderPagination() {
+  const paginationEl = document.querySelector(".pagination");
+  paginationEl.innerHTML = "";
+
+  numberOfPage = Math.ceil(categoryList.length / dataPerPage);
+  if (numberOfPage <= 1) return; // Không cần hiện phân trang nếu chỉ có 1 trang
+
+  paginationEl.innerHTML += `<li><a href="#" class="prev">Prev</a></li>`;
+
+  for (let i = 1; i <= numberOfPage; i++) {
+    paginationEl.innerHTML += `
+      <li class="pageNumber ${i === currentPage ? "active" : ""}">
+        <a href="#" onclick="changePage(${i})">${i}</a>
+      </li>
+    `;
+  }
+
+  paginationEl.innerHTML += `<li><a href="#" class="next">Next</a></li>`;
+  addPaginationEvents();
+}
+
+function addPaginationEvents() {
   const nextBtn = document.querySelector(".next");
   const prevBtn = document.querySelector(".prev");
   const pageNumbers = document.querySelectorAll(".pagination .pageNumber");
 
-  function setActivePage(target) {
-    const current = document.querySelector(".pagination .pageNumber.active");
-    if (current) {
-      current.classList.remove("active");
-    }
-    target.classList.add("active");
-  }
-
-  nextBtn.addEventListener("click", function () {
-    const current = document.querySelector(".pagination .pageNumber.active");
-    const next = current.nextElementSibling;
-    if (next && next.classList.contains("pageNumber")) {
-      setActivePage(next);
+  nextBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    if (currentPage < numberOfPage) {
+      changePage(currentPage + 1);
     }
   });
 
-  prevBtn.addEventListener("click", function () {
-    const current = document.querySelector(".pagination .pageNumber.active");
-    const prev = current.previousElementSibling;
-    if (prev && prev.classList.contains("pageNumber")) {
-      setActivePage(prev);
+  prevBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    if (currentPage > 1) {
+      changePage(currentPage - 1);
     }
   });
 
-  pageNumbers.forEach(function (page) {
-    page.addEventListener("click", function () {
-      setActivePage(page);
+  pageNumbers.forEach(function (page, index) {
+    page.addEventListener("click", function (e) {
+      e.preventDefault();
+      changePage(index + 1);
     });
   });
-});
+}
 
-//chức năng phân trang
 function changePage(page) {
-    currentPage = page;
-    renderCategory();
-    renderPagination();
-  }
+  currentPage = page;
+  sessionStorage.setItem("currentPage", currentPage);
+  renderCategory();
+}
+
+// Khởi tạo khi load
+renderCategory();

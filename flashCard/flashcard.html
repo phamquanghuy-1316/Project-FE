@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link rel="stylesheet" href="./flashcard.css">
+</head>
+
+<body>
+    <header>
+        <div class="headbox">
+            <h3>VocabApp</h3>
+        </div>
+        <div class="linkbox">
+            <a href="">Dashboard</a>
+            <a href="./categories/category.html">Categories</a>
+            <a href="#">Vocabulary</a>
+            <a href="/">Flashcards</a>
+            <a href="/">Quizz</a>
+        </div>
+    </header>
+
+    <div id="bodycontainer">
+        <div class="addBox">
+            <h2>Flashcard Learning</h2>
+            <select name="" id="selectCategory" onchange="searchVocab()">
+                <option value="">All category</option>
+            </select>
+        </div>
+        <div class="flashcard-container">
+            <div class="flashcard">
+                <div class="front">Mặt trước</div>
+                <div class="back">Mặt sau</div>
+            </div>
+        </div>
+
+        <div class="btn-container">
+            <button type="button" class="btn btn-primary" onclick="prevCard()">Previous</button>
+            <button type="button" class="btn btn-success" onclick="Markaslearned(event)">Mark as learned</button>
+            <button type="button" class="btn btn-primary" onclick="nextCard()">Next</button>
+        </div>
+
+        <div class="progress-container">
+            <p><span>progress</span><span>0/2</span></p>
+            <div class="progress">
+                <div class="bar"></div>
+            </div>
+        </div>
+
+        <div class="wordlist-container">
+            <h2>Word List</h2>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">WORD</th>
+                        <th scope="col">MEANING</th>
+                        <th scope="col">STATUS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- nội dung -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <p id="cre">&copy 2024 VocabApp. All right reserved.</p>
+    </footer>
+    <script src="https://kit.fontawesome.com/7b988689d5.js" crossorigin="anonymous"></script>
+    <script src="./flashcard.js"></script>
+</body>
+
+</html>

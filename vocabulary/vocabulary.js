@@ -25,9 +25,9 @@ function renderVocab(List = Vocabularies) {
             <tr>
                 <td>${List[i].word}</td>
                 <td>${List[i].meaning}</td>
-                <td>${categoryList[List[i].categoryID].name}</td>
+                <td>${categoryList.find(cat => cat.id == List[i].categoryID)?.name || "Chưa có"}</td>
                 <td>
-                    <button id="editbtn" onclick="LoadVocab(${i})"">Sửa</button>
+                    <button id="editbtn" onclick="LoadVocab(${i})">Sửa</button>
                     <button id="deletebtn" onclick="showDeleteModal(${List[i].id})">Xóa</button>
                 </td>
             </tr>
@@ -53,7 +53,7 @@ function addVocab(event) {
     word: word,
     meaning: meaning,
     categoryID: category,
-    example: "",
+    status: 0,
   });
 
   alert("Thêm thành công");
@@ -77,8 +77,7 @@ function LoadVocab(index) {
   currentEditIndex = index;
   document.getElementById("inputWord").value = Vocabularies[index].word;
   document.getElementById("inputMeaning").value = Vocabularies[index].meaning;
-  document.getElementById("inputCategory").value =
-    Vocabularies[index].categoryID;
+  document.getElementById("inputCategory").value = Vocabularies[index].categoryID;
 }
 
 //Hàm chỉnh sửa từ vựng
@@ -114,8 +113,7 @@ function searchVocab() {
 
   let arrayResult = Vocabularies.filter((Vocab) => {
     let matchWord = Vocab.word.toLowerCase().includes(vocabSearch);
-    let matchCategory =
-      categorySearch === "All categories" || Vocab.categoryID == categorySearch;
+    let matchCategory = categorySearch === "All categories" || Vocab.categoryID == categorySearch;
     return matchWord && matchCategory;
   });
 
@@ -137,22 +135,20 @@ function closeModal() {
   overlay.style.display = "none";
 }
 
+// Render các options của category
 function renderCategoryOptions() {
   let options = `<option value="Select categories">Select categories</option>`;
-  for (let id in categoryList) {
-    options += `
-      <option value="${id}">
-        ${categoryList[id].name}
-      </option>
-    `;
-  }
+  categoryList.forEach((category) => {
+    options += `<option value="${category.id}">${category.name}</option>`;
+  });
   return options;
 }
 
 function renderCategoty() {
   const categoryEl = document.querySelector("#selectCategory");
-  categoryEl.innerHTML = `${renderCategoryOptions()}
+  categoryEl.innerHTML = `
   <option value="All categories">All categories</option>
+  ${renderCategoryOptions()}
   `;
 }
 
