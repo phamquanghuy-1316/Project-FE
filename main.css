@@ -41,7 +41,8 @@ header a{
     color: grey;
 }
 
-header a:hover{
+header a:hover,
+.linkbox .active{
     color: #007bff;
 }
 

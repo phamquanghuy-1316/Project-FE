@@ -9,11 +9,11 @@ if(loggedInUser){
             <h3>VocabApp</h3>
         </div>
         <div class="linkbox">
-            <a href="#">Dashboard</a>
+            <a href="#" class="active">Dashboard</a>
             <a href="./categories/category.html">Categories</a>
             <a href="./vocabulary/vocabulary.html">Vocabulary</a>
-            <a href="#">Flashcards</a>
-            <a href="#">Quizz</a>
+            <a href="./flashCard/flashcard.html">Flashcards</a>
+            <a href="./quizz/quizz.html">Quizz</a>
         </div>
         <div class="logout">
             <span>hi ${loggedInUser.name}</span>
@@ -41,12 +41,12 @@ if(loggedInUser){
             <h3>VocabApp</h3>
         </div>
         <div class="linkbox">
-            <a href="">Dashboard</a>
+            <a href="#" class="active">Dashboard</a>
             <a href="./categories/category.html">Categories</a>
-            <a href="/">Vocabulary</a>
-            <a href="/">Flashcards</a>
-            <a href="/">Quizz</a>
-        </div>        
+            <a href="./vocabulary/vocabulary.html">Vocabulary</a>
+            <a href="./flashCard/flashcard.html">Flashcards</a>
+            <a href="./quizz/quizz.html">Quizz</a>
+        </div>       
     </header>
 
     <div id="home_container">

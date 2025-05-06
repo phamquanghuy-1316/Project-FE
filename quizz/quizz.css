@@ -1,0 +1,158 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+#bodycontainer {
+    flex: 1;
+    padding: 0vw 10vw 0vw 10vw;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
+
+.addBox{
+    display: flex;
+    justify-content: space-between;
+}
+
+select {
+    width: 80vw;
+    height: 6vh;
+}
+
+header {
+    display: flex;
+    height: 5vh;
+    gap: 1vw;
+    text-align: center;
+    align-items: center;
+    justify-content: left;
+    box-shadow: 2px 40px 100px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.searchBox{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.searchBox input{
+    width: 80vw;
+    height: 6vh;
+}
+.searchBox select{
+    width: 80vw;
+    height: 6vh;
+}
+
+.linkbox {
+    display: flex;
+    gap: 1vw;
+}
+
+header a {
+    text-decoration: none;
+    color: grey;
+}
+
+header a:hover,
+.linkbox .active {
+    color: #007bff;
+}
+
+.headbox {
+    margin-left: 5vw;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5vh;
+    width: 100%;
+    box-shadow: 2px 40px 100px rgba(0, 0, 0, 0.3);
+}
+
+.table {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px !important;
+    overflow: hidden;
+}
+
+.btn{
+    width: 150px;
+    font-size: larger;
+}
+
+#cre {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+/* progress bar */
+.progress{
+    height: 10px;
+}
+
+.progress .bar{
+    width: 80%;
+    height: 100%;
+    background-color: blue;
+    transition: width 0.6s ease;
+}
+
+.progress-container p{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* QuestBox */
+.question-container{
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: 5px;
+
+}
+
+.question-box{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.answerBtn{
+    height: 50px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+}
+
+.answerBtn.correct {
+    background-color: rgba(98, 194, 98, 0.3);
+    color: black;
+    pointer-events: none;
+}
+
+.answerBtn.incorrect {
+    background-color: rgba(219, 79, 63, 0.3);
+    color: black;
+    pointer-events: none;
+}
+

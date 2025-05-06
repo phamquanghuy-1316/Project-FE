@@ -117,6 +117,7 @@ function fillterStatus() {
     FilteredVocabularies = [...temporaryVocabularies];
   }
 
+  currentIndex = 0;
   renderVocab(FilteredVocabularies);
   renderQuantity(FilteredVocabularies);
   renderfront();
@@ -138,6 +139,7 @@ function renderCategoty() {
   categoryEl.value = currentCategory;
 }
 
+//render mặt trước
 const FrontEL = document.querySelector(".front");
 function renderfront() {
   if (FilteredVocabularies.length > 0) {
@@ -155,6 +157,14 @@ function renderback() {
   } else {
     BackEL.textContent = "No word";
   }
+}
+
+//hiệu ứng lật khi click
+function flipCard(){
+  document.querySelector(".flashcard").addEventListener("click", function(e){
+    e.preventDefault();
+    this.classList.toggle('flipped');
+  })
 }
 
 // Chuyển sang từ trước
@@ -249,6 +259,7 @@ function changePage(page) {
   renderVocab();
 }
 
+flipCard()
 renderQuantity();
 renderCategoty();
 searchCategory();
