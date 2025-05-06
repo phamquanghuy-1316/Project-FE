@@ -60,8 +60,7 @@ function renderVocab(List = FilteredVocabularies) {
             <tr>
                 <td>${currentData[i].word}</td>
                 <td>${currentData[i].meaning}</td>
-                <td>${currentData[i].status == 0 ? "Not Learned" : "Learned"
-      }</td>
+                <td style="color: ${currentData[i].status == 1 ? 'green' : 'black'};" >${currentData[i].status == 0 ? "Not Learned" : "Learned"}</td>
             </tr>
         `;
   }
