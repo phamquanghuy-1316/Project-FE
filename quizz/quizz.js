@@ -66,7 +66,7 @@ function startQuiz() {
 
     quizBox.style.display = "block";
     document.querySelector(".progress-container").style.display = "block";
-    document.querySelector("#NavgationBtn").style.display = "block";
+    document.querySelector("#NavgationBtn").style.display = "flex";
     renderQuestion();
     updateProgress();
 }
@@ -160,7 +160,7 @@ function endQuiz() {
 // Lưu lịch sử làm quiz vào localStorage theo tài khoản
 function saveHistory(score) {
     const user = getLoggedInUser();
-    const historyKey = `quizHistory_${user.email}`;
+    const historyKey = `quizHistory`;
     const historyList = getLocalData(historyKey);
     const newRecord = {
         date: new Date().toLocaleString(),

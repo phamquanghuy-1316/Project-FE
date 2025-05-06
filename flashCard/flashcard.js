@@ -83,7 +83,6 @@ function searchCategory() {
 
   // Sắp xếp theo tên
   FilteredVocabularies.sort((a, b) => a.word.localeCompare(b.word));
-
   currentIndex = 0;
   sessionStorage.setItem("currentPage", currentPage);
   renderVocab(FilteredVocabularies);
@@ -94,15 +93,14 @@ function searchCategory() {
 
 //tìm bài học theo tên
 function searchLession() {
-  const keyWord = document
-    .querySelector("#searchInput")
-    .value.trim()
-    .toLowerCase();
+  const searchInput = document.querySelector("#searchInput");
+  const keyWord = searchInput.value.trim().toLowerCase();
   currentIndex = FilteredVocabularies.findIndex(
     (v) => v.word.toLowerCase() == keyWord
   );
   renderfront();
   renderback();
+  searchInput.value='';
 }
 
 //lọc bài học theo trạng thái 
@@ -255,8 +253,11 @@ function addPaginationEvents() {
 
 function changePage(page) {
   currentPage = page;
+  currentIndex = (currentPage - 1) * dataPerPage;
   sessionStorage.setItem("currentPage", currentPage);
   renderVocab();
+  renderfront();
+  renderback();
 }
 
 flipCard()

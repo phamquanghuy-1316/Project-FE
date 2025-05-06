@@ -25,7 +25,7 @@ if(loggedInUser){
             <h1>Chào mừng bạn quay trở lại học, ${loggedInUser.name}</h1>
             <p>Tiếp tục học từ vựng và cải thiện kỹ năng của bạn hôm nay.</p>
             <div class="button">
-                <button type="button" class="btn btn-success">Làm Quizz</button>
+                <button type="button" class="btn btn-success" onclick="window.location.href = './quizz/quizz.html';">Làm Quizz</button>
             </div>
         </div>
     

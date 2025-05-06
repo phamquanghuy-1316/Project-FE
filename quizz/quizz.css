@@ -8,10 +8,8 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    display: flex;
     flex-direction: column;
     gap: 10px;
-
 }
 
 #bodycontainer {
@@ -154,5 +152,10 @@ footer {
     background-color: rgba(219, 79, 63, 0.3);
     color: black;
     pointer-events: none;
+}
+
+#NavgationBtn{
+    width: 100%;
+    justify-content: space-between;
 }
 
